@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Media Queries for Responsive Design */
+
+/* Mobile Styles (max-width: 768px) */
+@media (max-width: 768px) {
+  /* Manager Dashboard Mobile Layout */
+  .manager-dashboard {
+    flex-direction: column;
+  }
+
+  .manager-sidebar {
+    width: 100% !important;
+    height: auto !important;
+    position: relative !important;
+  }
+
+  .manager-content {
+    margin-left: 0 !important;
+    padding: 1rem !important;
+  }
+
+  .manager-header {
+    padding: 1rem !important;
+    text-align: center !important;
+  }
+
+  .manager-header h1 {
+    font-size: 1.5rem !important;
+  }
+
+  .manager-header p {
+    font-size: 0.875rem !important;
+  }
+
+  .metric-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  .metric-card {
+    padding: 1rem !important;
+  }
+
+  .welcome-card {
+    padding: 1.5rem !important;
+    margin-top: 1rem !important;
+  }
+}
+
+/* Tablet Styles (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .manager-sidebar {
+    width: 280px !important;
+  }
+
+  .manager-content {
+    margin-left: 280px !important;
+  }
+
+  .metric-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .manager-header {
+    padding: 2rem !important;
+  }
+}
+
+/* Small Desktop Styles (1025px - 1280px) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .manager-sidebar {
+    width: 300px !important;
+  }
+
+  .manager-content {
+    margin-left: 300px !important;
+  }
+
+  .metric-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+/* Large Desktop Styles (1281px+) */
+@media (min-width: 1281px) {
+  .manager-sidebar {
+    width: 320px !important;
+  }
+
+  .manager-content {
+    margin-left: 320px !important;
+  }
+
+  .metric-grid {
+    grid-template-columns: repeat(5, 1fr) !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .manager-sidebar,
+  .manager-header {
+    display: none !important;
+  }
+
+  .manager-content {
+    margin-left: 0 !important;
+    padding: 0 !important;
+  }
+
+  .metric-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
