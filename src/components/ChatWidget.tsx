@@ -31,7 +31,7 @@ export default function ChatWidget() {
   const [inputMessage, setInputMessage] = useState("");
   const [unreadCounts, setUnreadCounts] = useState<Record<string, number>>({});
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  
+
   const socketRef = useRef<Socket | null>(null);
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const selectedUserRef = useRef<User | null>(null);
@@ -62,8 +62,8 @@ export default function ChatWidget() {
   useEffect(() => {
     if (user && user._id) {
       // Connect to Socket
-      socketRef.current = io(process.env.NEXT_PUBLIC_API_URL?.replace("/api", "") || "http://localhost:5000");
-      
+      socketRef.current = io(process.env.NEXT_PUBLIC_API_BASE_URL?.replace("/api", "") || "http://localhost:5000");
+
       socketRef.current.on("connect", () => {
         socketRef.current?.emit("join", user._id);
       });
@@ -71,7 +71,7 @@ export default function ChatWidget() {
       socketRef.current.on("new_message", (message: Message) => {
         const su = selectedUserRef.current;
         const currentIsOpen = isOpenRef.current;
-        
+
         if (su && (message.senderId === su._id || message.receiverId === su._id)) {
           setMessages((prev) => {
             // Prevent duplicate messages in case of re-renders
@@ -79,7 +79,7 @@ export default function ChatWidget() {
             return [...prev, message];
           });
         }
-        
+
         // Notify if it's an incoming message and (chat closed OR not on the sender's chat)
         if (message.senderId !== user._id) {
           if (!currentIsOpen || !su || su._id !== message.senderId) {
@@ -87,7 +87,7 @@ export default function ChatWidget() {
               ...prev,
               [message.senderId]: (prev[message.senderId] || 0) + 1
             }));
-            
+
             const sender = contactsRef.current.find(c => c._id === message.senderId);
             const senderName = sender ? sender.name : "Someone";
             setToastMessage(`New message from ${senderName}`);
@@ -146,7 +146,7 @@ export default function ChatWidget() {
             {toastMessage}
           </div>
         )}
-        <button 
+        <button
           onClick={() => setIsOpen(true)}
           className="relative p-4 bg-indigo-600 text-white rounded-full shadow-2xl hover:bg-indigo-700 hover:scale-105 transition-all flex items-center justify-center cursor-pointer"
         >
@@ -211,13 +211,13 @@ export default function ChatWidget() {
           ) : (
             /* Chat Area */
             <div className="w-full flex flex-col bg-slate-50 relative">
-              <button 
+              <button
                 onClick={() => setSelectedUser(null)}
                 className="absolute top-2 left-2 z-10 text-xs bg-white border border-slate-200 px-3 py-1 rounded-full shadow-sm hover:bg-slate-50 text-slate-600 cursor-pointer transition-colors"
               >
                 ← Back
               </button>
-              
+
               <div className="flex-1 overflow-y-auto p-4 space-y-4 mt-10">
                 {messages.map((msg, idx) => {
                   const isMe = msg.senderId === user?._id;
