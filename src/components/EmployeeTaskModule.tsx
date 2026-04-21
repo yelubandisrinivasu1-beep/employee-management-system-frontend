@@ -28,7 +28,7 @@ export default function EmployeeTaskModule() {
 
     const currentId = user?._id || (user as any)?.id;
     if (currentId) {
-      const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL?.replace("/api", "") || "http://localhost:5000");
+      const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL?.replace("/api", "") );
       socket.on("connect", () => {
         socket.emit("join", currentId);
       });

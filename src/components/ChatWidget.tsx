@@ -62,7 +62,7 @@ export default function ChatWidget() {
   useEffect(() => {
     if (user && user._id) {
       // Connect to Socket
-      socketRef.current = io(process.env.NEXT_PUBLIC_API_BASE_URL?.replace("/api", "") || "http://localhost:5000");
+      socketRef.current = io(process.env.NEXT_PUBLIC_API_BASE_URL?.replace("/api", ""));
 
       socketRef.current.on("connect", () => {
         socketRef.current?.emit("join", user._id);

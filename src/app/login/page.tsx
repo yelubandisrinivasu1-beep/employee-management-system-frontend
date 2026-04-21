@@ -23,7 +23,7 @@ export default function LoginPage() {
 
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login` || "http://localhost:5000/api/auth/login",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,
         { email, password }
       );
 
@@ -65,7 +65,7 @@ export default function LoginPage() {
 
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api"}/auth/reset-password`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/reset-password`,
         { email, newPassword: password }
       );
 
