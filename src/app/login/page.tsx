@@ -23,7 +23,7 @@ export default function LoginPage() {
 
     try {
       const response = await axios.post(
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/auth/login",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login` || "http://localhost:5000/api/auth/login",
         { email, password }
       );
 
@@ -47,7 +47,7 @@ export default function LoginPage() {
             router.push("/");
         }
       }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(
         err.response?.data?.message || "Failed to login. Please try again."
@@ -65,7 +65,7 @@ export default function LoginPage() {
 
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api"}/auth/reset-password`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api"}/auth/reset-password`,
         { email, newPassword: password }
       );
 
@@ -90,17 +90,17 @@ export default function LoginPage() {
         <div className="absolute inset-0 bg-gradient-to-tr from-indigo-900/60 to-blue-900/20 mix-blend-multiply z-10"></div>
         <img src="/company_hero.png" alt="Company Tech Building" className="absolute inset-0 w-full h-full object-cover z-0 opacity-80" />
         <div className="relative z-20 flex flex-col justify-end p-12 h-full bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent w-full">
-            {/* Some branding over the image */}
-            <div className="w-16 h-1 bg-blue-500 mb-8 rounded-full shadow-[0_0_15px_rgba(59,130,246,1)]"></div>
-            <h1 className="text-4xl lg:text-7xl font-extrabold text-white tracking-tight mb-4 drop-shadow-xl">
-              Enterprise<br/>Excellence
-            </h1>
-            <p className="text-lg text-indigo-100 max-w-lg mb-8 font-light drop-shadow">
-              Connecting teams, streamlining assignments, and driving robust analytics through our premier internal communications portal.
-            </p>
-            <div className="text-xs font-bold tracking-widest text-slate-400 uppercase mt-4">
-               Pengwin Tech Solution © {new Date().getFullYear()}
-            </div>
+          {/* Some branding over the image */}
+          <div className="w-16 h-1 bg-blue-500 mb-8 rounded-full shadow-[0_0_15px_rgba(59,130,246,1)]"></div>
+          <h1 className="text-4xl lg:text-7xl font-extrabold text-white tracking-tight mb-4 drop-shadow-xl">
+            Enterprise<br />Excellence
+          </h1>
+          <p className="text-lg text-indigo-100 max-w-lg mb-8 font-light drop-shadow">
+            Connecting teams, streamlining assignments, and driving robust analytics through our premier internal communications portal.
+          </p>
+          <div className="text-xs font-bold tracking-widest text-slate-400 uppercase mt-4">
+            Pengwin Tech Solution © {new Date().getFullYear()}
+          </div>
         </div>
       </div>
 
@@ -254,7 +254,7 @@ export default function LoginPage() {
                   </>
                 )}
               </button>
-              
+
               <div className="text-center mt-4">
                 <button type="button" onClick={() => { setShowForgotPassword(false); setError(""); setSuccessMsg(""); }} className="text-sm font-semibold text-slate-500 hover:text-slate-800 transition-colors">
                   Back to Sign In
@@ -275,7 +275,7 @@ export default function LoginPage() {
 
           <div className="mt-8 p-5 bg-white/50 rounded-2xl border border-slate-200/60 shadow-sm">
             <p className="text-[10px] text-slate-500 mb-2 font-bold uppercase tracking-widest text-center flex items-center justify-center gap-1.5">
-               <FiAlertCircle className="w-3 h-3 text-blue-500" /> Terms & Conditions
+              <FiAlertCircle className="w-3 h-3 text-blue-500" /> Terms & Conditions
             </p>
             <p className="text-[11px] text-slate-500/80 leading-relaxed text-center font-medium">
               By accessing the Pengwin Tech portal, you agree to our corporate policies on data privacy, professional conduct, and security.

@@ -36,7 +36,7 @@ export default function TechManagerTaskModule({ teamEmployees }: { teamEmployees
 
     const currentId = user?._id || (user as any)?.id;
     if (currentId) {
-      const socket = io(process.env.NEXT_PUBLIC_API_URL?.replace("/api", "") || "http://localhost:5000");
+      const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL?.replace("/api", "") || "http://localhost:5000");
       socket.on("connect", () => {
         socket.emit("join", currentId);
       });
@@ -71,7 +71,7 @@ export default function TechManagerTaskModule({ teamEmployees }: { teamEmployees
         <h2 className="text-xl font-bold text-white flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></div> Task Control Center
         </h2>
-        <button 
+        <button
           onClick={() => setShowConfig(!showConfig)}
           className="text-sm px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors"
         >
@@ -83,15 +83,15 @@ export default function TechManagerTaskModule({ teamEmployees }: { teamEmployees
         <form onSubmit={handleCreateTask} className="mb-6 bg-slate-900 border border-slate-700 p-5 rounded-xl grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
           <div className="md:col-span-2">
             <label className="block text-slate-400 mb-1">Task Title <span className="text-rose-500">*</span></label>
-            <input required type="text" className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" value={formData.title} onChange={e=>setFormData({...formData, title: e.target.value})} />
+            <input required type="text" className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} />
           </div>
           <div className="md:col-span-2">
             <label className="block text-slate-400 mb-1">Description</label>
-            <textarea className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" value={formData.description} onChange={e=>setFormData({...formData, description: e.target.value})} />
+            <textarea className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} />
           </div>
           <div>
             <label className="block text-slate-400 mb-1">Assign To <span className="text-rose-500">*</span></label>
-            <select required className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" value={formData.employee} onChange={e=>setFormData({...formData, employee: e.target.value})}>
+            <select required className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" value={formData.employee} onChange={e => setFormData({ ...formData, employee: e.target.value })}>
               <option value="">-- Select Employee --</option>
               {teamEmployees?.map((emp) => (
                 <option key={emp._id} value={emp._id}>{emp.user?.name} ({emp.designation})</option>
@@ -100,7 +100,7 @@ export default function TechManagerTaskModule({ teamEmployees }: { teamEmployees
           </div>
           <div>
             <label className="block text-slate-400 mb-1">Priority</label>
-            <select className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" value={formData.priority} onChange={e=>setFormData({...formData, priority: e.target.value})}>
+            <select className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" value={formData.priority} onChange={e => setFormData({ ...formData, priority: e.target.value })}>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
@@ -108,7 +108,7 @@ export default function TechManagerTaskModule({ teamEmployees }: { teamEmployees
           </div>
           <div>
             <label className="block text-slate-400 mb-1">Due Date</label>
-            <input type="date" className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" value={formData.dueDate} onChange={e=>setFormData({...formData, dueDate: e.target.value})} />
+            <input type="date" className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" value={formData.dueDate} onChange={e => setFormData({ ...formData, dueDate: e.target.value })} />
           </div>
           <div className="flex items-end">
             <button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg p-2.5 transition">Deploy Task</button>
@@ -149,9 +149,9 @@ export default function TechManagerTaskModule({ teamEmployees }: { teamEmployees
                   </td>
                   <td className="py-4">
                     <span className="flex items-center gap-1.5 text-xs font-semibold">
-                      {task.status === "completed" && <><FiCheckCircle className="text-emerald-400"/> <span className="text-emerald-400">COMPLETED</span></>}
-                      {task.status === "in_progress" && <><FiClock className="text-amber-400 animate-pulse"/> <span className="text-amber-400">IN PROGRESS</span></>}
-                      {task.status === "pending" && <><FiAlertCircle className="text-slate-400"/> <span className="text-slate-400">PENDING</span></>}
+                      {task.status === "completed" && <><FiCheckCircle className="text-emerald-400" /> <span className="text-emerald-400">COMPLETED</span></>}
+                      {task.status === "in_progress" && <><FiClock className="text-amber-400 animate-pulse" /> <span className="text-amber-400">IN PROGRESS</span></>}
+                      {task.status === "pending" && <><FiAlertCircle className="text-slate-400" /> <span className="text-slate-400">PENDING</span></>}
                     </span>
                   </td>
                 </tr>
